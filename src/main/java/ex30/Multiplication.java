@@ -53,7 +53,7 @@ public class Multiplication {
     }
 
     private static void multiplicationTable(int[] factors1, int[] factors2) {
-        Character ch = ' ';
+        char ch = ' ';
         int max = Math.max(factors1.length, factors2.length);
         for (int i = 1; i < max; i++) {
             for (int j = 1; j < max; j++) {

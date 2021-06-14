@@ -28,27 +28,26 @@ public class Adding {
     public static final Scanner in = new Scanner(System.in);
 
     public static void main(String[] args){
-        double numbers[] = new double [5];
+        double[] numbers;
 
-        numbers = getDouble("Enter a number: ", 5);
+        numbers = getDouble();
 
-        System.out.println("The total is " + sumDoubleArray(numbers));
+        System.out.printf("The total is %f", sumDoubleArray(numbers));
     }
 
-    private static double[] getDouble(String prompt, int times){
-        double num[] = new double [times];
-        for (int i = 0; i < times; i++){
-            System.out.println(prompt);
+    private static double[] getDouble(){
+        double[] num = new double [5];
+        for (int i = 0; i < 5; i++){
+            System.out.println("Enter a number:");
             num[i] = in.nextDouble();
         }
         return num;
     }
 
     private static double sumDoubleArray(double[] numbers){
-        int size = numbers.length;
         double sum = 0;
-        for (int i = 0; i < size; i++){
-            sum += numbers[i];
+        for (double number : numbers) {
+            sum += number;
         }
         return sum;
     }

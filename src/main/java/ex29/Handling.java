@@ -33,25 +33,23 @@ The rule of 72 is a quick method for estimating how long it will take to double 
 package ex29;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Handling {
     private static final Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-        double rate = getValidInputs("What is the rate of return?");
+        double rate = getValidInputs();
         System.out.printf("It will take %.0f years to double your initial investment.", ruleOf72(rate));
     }
 
-    private static double getValidInputs(String prompt) {
-        double num = 0;
+    private static double getValidInputs() {
+        double num;
 
         while (true){
-            System.out.println(prompt);
+            System.out.println("What is the rate of return?");
             String input = in.nextLine();
 
-            if (checkIfDoubleNonZeroValueNonEmpty(input) == false){
+            if (!checkIfDoubleNonZeroValueNonEmpty(input)){
                 System.out.println("Please enter a valid number");
             }
             else {
@@ -70,9 +68,6 @@ public class Handling {
         if (number.isEmpty()) {
             return false;
         }
-        if (number == null) {
-            return false;
-        }
         try {
             double d = Double.parseDouble(number);
             if (d == 0) {
@@ -82,12 +77,6 @@ public class Handling {
             return false;
         }
         return true;
-    }
-
-    private static String getInput(String prompt) {
-        System.out.println(prompt);
-        String input = in.nextLine();
-        return input;
     }
 
     private static double ruleOf72(double rate) {
