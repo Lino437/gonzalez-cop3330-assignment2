@@ -1,0 +1,8 @@
+@startuml
+class ConsoleApplication
+class GUIApplication
+class Calculator
+
+ConsoleApplication o-> Calculator
+GUIApplication o-> Calculator
+@enduml
