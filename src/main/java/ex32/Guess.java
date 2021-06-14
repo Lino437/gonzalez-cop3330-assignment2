@@ -49,75 +49,65 @@ import java.util.Scanner;
 
 public class Guess {
     private static final Scanner in = new Scanner(System.in);
-    private static final Random random = new Random();
 
-    public static void main(String[] args){
-        int difficulty = 0;
-
+    public static void main(String[] args) {
+        boolean tf = true;
+        System.out.println("Let's play Guess the Number!");
+        System.out.println();
+        while(tf){
+            numberGame();
+            tf = continueOrStop();
+        }
     }
 
-    private static void numberGame(int difficulty){
+    private static void numberGame() {
+        Random random = new Random();
+
+        int count = 0;
+        int difficulty = getValidInputs("Enter the difficulty level (1, 2, or 3):");
         int max = (int) Math.pow(10, difficulty);
-        while (true){
+        int x = random.nextInt(max) + 1;
+        int num;
 
-        }
-    }
+        num = getValidInputs("I have my number. What's your guess?");
 
-    private static boolean checkIfYesNo(String letters) {
-        if (letters.isBlank()) {
-            return false;
-        }
-        if (letters.isEmpty()) {
-            return false;
-        }
-        if (letters == null) {
-            return false;
-        }
-        if (letters.equals("y")||letters.equals("Y") || letters.equals("n") || letters.equals("N")) {
-            return true;
-        }
-        return false;
-    }
+        while(true){
+            count += 1;
 
-
-    private static double getValidInputs(String prompt) {
-        double num = 0;
-
-        while (true){
-            System.out.println(prompt);
-            String input = in.nextLine();
-
-            if (checkIfDoubleNonZeroValueNonEmpty(input) == true){
-                System.out.println("Please enter a valid number");
+            if (num  < x) {
+                num = getValidInputs("Too low. Guess again:");
             }
-            else {
-                num = Double.parseDouble(input);
+            else if (num > x){
+                num = getValidInputs("Too high. Guess again:");
+            }
+            else{
+                System.out.printf("You got it in %d guesses!\n", count);
+                System.out.println();
                 break;
             }
         }
-
-        return num;
     }
 
-    private static boolean checkIf123(String number) {
-        if (number.isBlank()) {
-            return false;
-        }
-        if (number.isEmpty()) {
-            return false;
-        }
-        if (number == null) {
-            return false;
-        }
-        try {
-            double d = Double.parseDouble(number);
-            if (d <= 0 || d > 3) {
-                return false;
+    private static boolean continueOrStop(){
+        System.out.println("Do you wish to play again?  (Y/N)");
+        String yesNo = in.nextLine();
+        return yesNo.equals("y") || yesNo.equals("Y");
+    }
+
+    private static int getValidInputs(String prompt) {
+        int num;
+
+            System.out.println(prompt);
+            String input = in.nextLine();
+
+            if (!checkIfDoubleNonZeroValueNonEmpty(input)) {
+                return 0;
+            } else {
+                num = Integer.parseInt(input);
             }
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-        return true;
+
+
+        return num;
     }
 
     private static boolean checkIfDoubleNonZeroValueNonEmpty(String number) {
@@ -127,11 +117,8 @@ public class Guess {
         if (number.isEmpty()) {
             return false;
         }
-        if (number == null) {
-            return false;
-        }
         try {
-            double d = Double.parseDouble(number);
+            double d = Integer.parseInt(number);
             if (d <= 0) {
                 return false;
             }
