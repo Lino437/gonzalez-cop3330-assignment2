@@ -1,8 +1,36 @@
 @startuml
-class ConsoleApplication
-class GUIApplication
-class Calculator
+'https://plantuml.com/class-diagram
 
-ConsoleApplication o-> Calculator
-GUIApplication o-> Calculator
+class Gradebook{
+    Assignment: List
+
+    addStudent(Student)
+    removeStudent(Student)
+    lookupStudentGrades(Student)
+
+    getAssignmentStatistics(Assignment)
+    addAssignment(Assignment)
+    removeAssignment(Assignment)
+}
+
+class Assignment {
+    Student: List
+
+    getScore()
+    setScore()
+}
+
+class Student{
+    assignment: List
+
+    countMissingAssignment()
+    getScoreForAssignment()
+    setScoreForAssignment()
+}
+
+
+
+Gradebook o--> Student
+Student o--> Assignment
+
 @enduml

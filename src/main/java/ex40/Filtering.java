@@ -1,4 +1,9 @@
 /*
+ *  UCF COP3330 Summer 2021 Assignment 2 Solution
+ *  Copyright 2021 Jose Gonzalez
+ */
+
+/*
 Sorting records is helpful, but sometimes you need to filter down the results to find or display only what you’re looking for.
 
 Given the following data set create a program that lets a user locate all records that match the search string by comparing the search string to the first or last name field.

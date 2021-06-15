@@ -30,20 +30,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Password {
-    private static Scanner in = new Scanner(System.in);
+    private static final Scanner in = new Scanner(System.in);
 
     public static void main(String[] args){
-        String password = readText("Type your password: ");
+        String password = readText();
 
         int strength = passwordValidator(password);
 
         passwordString(strength, password);
     }
 
-    private static String readText(String prompt) {
-        System.out.print(prompt);
-        String text = in.nextLine();
-        return text;
+    private static String readText() {
+        System.out.print("Type your password: ");
+        return in.nextLine();
     }
 
     public static boolean onlyDigits(String str)
@@ -67,26 +66,25 @@ public class Password {
     public static boolean containsSpacialChar(String password){
         Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(password);
-        boolean b = m.find();
-        return b;
+        return m.find();
     }
 
     private static int passwordValidator(String password){
         if (password.length() < 8) {
-                if (onlyDigits(password) == true) {
+                if (onlyDigits(password)) {
                     return 0;
                 }
-                if (isStringOnlyAlphabet(password) == true) {
+                if (isStringOnlyAlphabet(password)) {
                     return 1;
                 }
         }
 
         else {
-            if (onlyDigits(password) == false && isStringOnlyAlphabet(password) == false) {
-                if (containsSpacialChar(password) == false){
+            if (!onlyDigits(password) && !isStringOnlyAlphabet(password)) {
+                if (!containsSpacialChar(password)){
                     return 2;
                 }
-                else if (containsSpacialChar(password) == true){
+                else if (containsSpacialChar(password)){
                     return 3;
                 }
             }

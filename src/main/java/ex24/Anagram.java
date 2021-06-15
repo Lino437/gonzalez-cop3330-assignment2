@@ -27,16 +27,16 @@ import java.util.Scanner;
 
 public class Anagram {
 
-    private static Scanner in = new Scanner(System.in);
+    private static final Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.printf("Enter two strings and I'll tell you if they are anagrams:\n");
+        System.out.print("Enter two strings and I'll tell you if they are anagrams:\n");
         String firstSt = readText("Enter the first string:");
         String secondSt = readText("Enter the second string:");
 
         Boolean tf = checkIfAnagram(firstSt,secondSt);
 
-        if (tf == true){
+        if (tf){
             System.out.printf("\"%s\" and \"%s\" are anagrams.", firstSt, secondSt);
         }
         else{
@@ -46,16 +46,7 @@ public class Anagram {
 
     private static String readText(String prompt) {
         System.out.print(prompt);
-        String text = in.nextLine();
-        return text;
-    }
-
-    private static char[] stringToChar(String text) {
-        char[] letters = new char[45];
-        for (int i = 0; i < text.length(); i++) {
-            letters[i] = text.charAt(i);
-        }
-        return letters;
+        return in.nextLine();
     }
 
     public static Boolean checkIfAnagram(String first, String second) {
