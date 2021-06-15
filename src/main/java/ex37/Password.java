@@ -24,11 +24,12 @@ Ensure that there are at least as many letters are there are special characters 
 package ex37;
 
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Password{
     private static final Scanner in = new Scanner(System.in);
-    private static SecureRandom random = new SecureRandom();
+    private static final SecureRandom random = new SecureRandom();
 
     public static void main(String[] args)
     {
@@ -48,9 +49,8 @@ public class Password{
             System.out.println("Please enter a positive number");
             value = in.nextLine();
         }
-        int number = Integer.parseInt(value);
 
-        return number;
+        return Integer.parseInt(value);
     }
 
     private static boolean checkIfDoubleNonZeroValueNonEmpty(String number) {
@@ -74,6 +74,8 @@ public class Password{
     public static String generateRandomPassword(int len, int special, int numbers)
     {
         final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        String specialChar = (specialChar(special));
+        String randomNumbers = (getRandomNumbers(numbers));
 
         SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder();
@@ -83,30 +85,38 @@ public class Password{
             int randomIndex = random.nextInt(chars.length());
             sb.append(chars.charAt(randomIndex));
         }
-        sb.append(specialChar(numbers));
-        sb.append(getRandomNumbers(numbers));
+        for (int i = 0; i < special; i++)
+        {
+            int randomIndex = random.nextInt(specialChar.length());
+            sb.append(specialChar.charAt(randomIndex));
+        }
+        for (int i = 0; i < numbers; i++)
+        {
+            int randomIndex = random.nextInt(randomNumbers.length());
+            sb.append(randomNumbers.charAt(randomIndex));
+        }
 
         return sb.toString();
     }
 
-    private static char[] specialChar(int count){
+    private static String specialChar(int count){
         final String chars = "!@#$%^&*(),./;'[]{}:<>>?`~|_+-=";
         char[] special = new char[count];
 
         for (int i = 0; i < count; i++){
             special[i] = chars.charAt(random.nextInt(chars.length())) ;
         }
-        return special;
+        return Arrays.toString(special);
     }
 
-    private static int[] getRandomNumbers(int count){
+    private static String getRandomNumbers(int count){
         int[] numbers = new int[count];
 
         for (int i = 0; i < count - 1; i++){
             numbers[i] = random.nextInt(10);
         }
 
-        return numbers;
+        return Arrays.toString(numbers);
     }
 
 
